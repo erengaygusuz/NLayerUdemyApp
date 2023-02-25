@@ -43,7 +43,7 @@ namespace NLayer.Repository.Configurations.Seeds
                  },
                  new Product()
                  {
-                     Id = 1,
+                     Id = 4,
                      CategoryId = 2,
                      Name = "Kitap 1",
                      Price = 700,
@@ -52,7 +52,7 @@ namespace NLayer.Repository.Configurations.Seeds
                  },
                  new Product()
                  {
-                     Id = 1,
+                     Id = 5,
                      CategoryId = 2,
                      Name = "Kitap 2",
                      Price = 6000,
