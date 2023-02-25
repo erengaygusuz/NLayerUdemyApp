@@ -35,7 +35,7 @@ namespace NLayer.Repository.Repositories
             return await _dbSet.AnyAsync(expression);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GetAll()
         {
             return _dbSet.AsNoTracking().AsQueryable();
         }
@@ -50,7 +50,7 @@ namespace NLayer.Repository.Repositories
             _dbSet.Remove(entity);
         }
 
-        public void RemoveRangeAsync(IEnumerable<T> entities)
+        public void RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
         }
