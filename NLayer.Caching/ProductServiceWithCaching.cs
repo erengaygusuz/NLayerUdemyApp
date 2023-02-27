@@ -33,7 +33,7 @@ namespace NLayer.Caching
 
             if (!_memoryCache.TryGetValue(CacheProductKey, out _))
             {
-                _memoryCache.Set(CacheProductKey, repository.GetRepositoryWithCategory());
+                _memoryCache.Set(CacheProductKey, repository.GetRepositoryWithCategory().Result);
             }
         }
 
