@@ -15,7 +15,7 @@ namespace NLayer.Repository.Repositories
         {
         }
 
-        public async Task<List<Product>> GetRepositoryWithCategory()
+        public async Task<List<Product>> GetProductsWithCategory()
         {
             return await _context.Products.Include(p => p.Category).ToListAsync();
         }
