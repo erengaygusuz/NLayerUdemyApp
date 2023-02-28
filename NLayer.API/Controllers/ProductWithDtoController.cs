@@ -7,8 +7,6 @@ using NLayer.Core.Services;
 
 namespace NLayer.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class ProductWithDtoController : CustomBaseController
     {
         private readonly IProductServiceWithDto _productServiceWithDto;
