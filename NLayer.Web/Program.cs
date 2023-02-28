@@ -23,14 +23,6 @@ namespace NLayer.Web
 
             builder.Services.AddAutoMapper(typeof(MapProfile));
 
-            builder.Services.AddDbContext<AppDbContext>(x =>
-            {
-                x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
-                {
-                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
-                });
-            });
-
             builder.Services.AddHttpClient<ProductApiService>(opt =>
             {
                 opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);

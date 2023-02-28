@@ -18,50 +18,14 @@ namespace NLayer.Repository
 
         public override int SaveChanges()
         {
-            foreach (var item in ChangeTracker.Entries())
-            {
-                if (item.Entity is BaseEntity entityReference)
-                {
-                    switch (item.State)
-                    {
-                        case EntityState.Added:
-                            {
-                                entityReference.CreatedDate = DateTime.Now; break;
-                            }
-                        case EntityState.Modified:
-                            {
-                                Entry(entityReference).Property(x => x.CreatedDate).IsModified = false;
-
-                                entityReference.UpdatedDate = DateTime.Now; break;
-                            }
-                    }
-                }
-            }
+            UpdateChangeTracker();
 
             return base.SaveChanges();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach(var item in ChangeTracker.Entries())
-            {
-                if (item.Entity is BaseEntity entityReference)
-                {
-                    switch (item.State)
-                    {
-                        case EntityState.Added:
-                            {
-                                entityReference.CreatedDate = DateTime.Now; break;
-                            }
-                        case EntityState.Modified:
-                            {
-                                Entry(entityReference).Property(x => x.CreatedDate).IsModified = false;
-
-                                entityReference.UpdatedDate = DateTime.Now; break;
-                            }
-                    }
-                }
-            }
+            UpdateChangeTracker();
 
             return base.SaveChangesAsync(cancellationToken);
         }
@@ -89,6 +53,32 @@ namespace NLayer.Repository
             );
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public void UpdateChangeTracker()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entityReference)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                Entry(entityReference).Property(x => x.UpdatedDate).IsModified = false;
+                                entityReference.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(entityReference).Property(x => x.CreatedDate).IsModified = false;
+
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+            }
         }
     }
 }
